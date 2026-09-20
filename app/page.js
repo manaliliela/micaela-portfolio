@@ -23,6 +23,26 @@ const stagger = {
   },
 };
 
+function Flower({ petal = "#F6C7D1", center = "#F3CC68", className = "" }) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g fill={petal}>
+        <ellipse cx="50" cy="18" rx="12" ry="20" />
+        <ellipse cx="50" cy="18" rx="12" ry="20" transform="rotate(60 50 50)" />
+        <ellipse cx="50" cy="18" rx="12" ry="20" transform="rotate(120 50 50)" />
+        <ellipse cx="50" cy="18" rx="12" ry="20" transform="rotate(180 50 50)" />
+        <ellipse cx="50" cy="18" rx="12" ry="20" transform="rotate(240 50 50)" />
+        <ellipse cx="50" cy="18" rx="12" ry="20" transform="rotate(300 50 50)" />
+      </g>
+      <circle cx="50" cy="50" r="14" fill={center} />
+    </svg>
+  );
+}
+
 export default function Home() {
   return (
     <main>
@@ -35,64 +55,61 @@ export default function Home() {
         Reliable support for smoother operations.
       </motion.div>
 
-      <motion.header
+      <motion.div
         className="header"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.1 }}
       >
         <a href="#home" className="logo">
-          MICAELA
+          <span className="lM">M</span>
+          <span className="lI">I</span>
+          <span className="lC">C</span>
+          <span className="lA1">A</span>
+          <span className="lE">E</span>
+          <span className="lL">L</span>
+          <span className="lA2">A</span>
         </a>
+      </motion.div>
 
-        <nav>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#experience">Experience</a>
-          <a href="#work">Work</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </motion.header>
+      <motion.nav
+        className="navBar"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#experience">Experience</a>
+        <a href="#work">Work</a>
+        <a href="#tools">Tools</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </motion.nav>
 
       <section className="hero" id="home">
-        <motion.span
+        <motion.div
           className="flower flowerOne"
-          animate={{
-            y: [0, -12, 0],
-            rotate: [-5, 5, -5],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, -12, 0], rotate: [-5, 5, -5] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
-          ✿
-        </motion.span>
+          <Flower petal="#8DBCBC" center="#F7D8DF" />
+        </motion.div>
 
-        <motion.span
+        <motion.div
           className="flower flowerTwo"
-          animate={{
-            y: [0, 10, 0],
-            rotate: [5, -5, 5],
-          }}
-          transition={{
-            duration: 4.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, 10, 0], rotate: [5, -5, 5] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          ✦
-        </motion.span>
+          <Flower petal="#F3CC68" center="#FFFDF9" />
+        </motion.div>
 
         <motion.div
           className="heroCard"
           initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 0.9,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.p
             className="eyebrow"
@@ -103,39 +120,18 @@ export default function Home() {
             OPERATIONS VIRTUAL ASSISTANT
           </motion.p>
 
-          <motion.h1
-            variants={stagger}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.span
-              variants={fadeUp}
-              style={{
-                display: "inline-block",
-                color: "inherit",
-                fontStyle: "normal",
-              }}
-            >
+          <motion.h1 variants={stagger} initial="hidden" animate="visible">
+            <motion.span variants={fadeUp} style={{ display: "inline-block" }}>
               Helping you stay
             </motion.span>
 
             <br />
 
-            <motion.span
-              variants={fadeUp}
-              style={{ display: "inline-block" }}
-            >
+            <motion.span variants={fadeUp} className="lineAccent">
               organized,
             </motion.span>
 
-            <motion.span
-              variants={fadeUp}
-              style={{
-                display: "inline-block",
-                color: "inherit",
-                fontStyle: "normal",
-              }}
-            >
+            <motion.span variants={fadeUp} style={{ display: "inline-block" }}>
               {" "}while work
             </motion.span>
 
@@ -143,11 +139,8 @@ export default function Home() {
 
             <motion.span
               variants={fadeUp}
-              style={{
-                display: "inline-block",
-                color: "inherit",
-                fontStyle: "normal",
-              }}
+              className="lineTeal"
+              style={{ display: "inline-block" }}
             >
               keeps moving.
             </motion.span>
@@ -199,7 +192,6 @@ export default function Home() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <p className="sectionNumber">01</p>
-
           <div>
             <p className="eyebrow">WHAT I CAN HELP WITH</p>
             <h2>Support that keeps things moving.</h2>
@@ -243,10 +235,7 @@ export default function Home() {
               key={item.number}
               variants={fadeUp}
               className={`serviceCard ${item.className}`}
-              whileHover={{
-                y: -10,
-                rotate: item.number === "02" ? 1 : -1,
-              }}
+              whileHover={{ y: -10, rotate: item.number === "02" ? 1 : -1 }}
               transition={{ duration: 0.25 }}
             >
               <span>{item.number}</span>
@@ -267,10 +256,8 @@ export default function Home() {
         >
           <p className="sectionNumber">02</p>
           <p className="eyebrow">BEHIND THE SCENES</p>
-
           <h2>
-            I help turn busy,
-            <span> scattered work</span>
+            I help turn busy, <span>scattered work</span>
             <br />
             into something easier to manage.
           </h2>
@@ -282,10 +269,7 @@ export default function Home() {
             initial={{ opacity: 0, x: -50, rotate: -4 }}
             whileInView={{ opacity: 1, x: 0, rotate: 0 }}
             viewport={{ once: true, amount: 0.25 }}
-            transition={{
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
-            }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="shapeText">
               <span>7+</span>
@@ -298,10 +282,7 @@ export default function Home() {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.25 }}
-            transition={{
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
-            }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <p>
               I&apos;m Micaela, an Operations Virtual Assistant with experience
@@ -331,7 +312,6 @@ export default function Home() {
           viewport={{ once: true }}
         >
           <p className="sectionNumber">03</p>
-
           <div>
             <p className="eyebrow">EXPERIENCE</p>
             <h2>Different teams. Different roles. One organized approach.</h2>
@@ -370,7 +350,6 @@ export default function Home() {
           viewport={{ once: true }}
         >
           <p className="sectionNumber">04</p>
-
           <div>
             <p className="eyebrow">SELECTED WORK</p>
             <h2>A little look at what I&apos;ve worked on.</h2>
@@ -404,7 +383,6 @@ export default function Home() {
 
               <div className="projectInfo">
                 <span>{item[1]}</span>
-
                 <div>
                   <h3>{item[2]}</h3>
                   <p>{item[3]}</p>
@@ -415,7 +393,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="tools">
+      <section className="tools" id="tools">
+        <Flower petal="#FFFFFF" center="#F3CC68" className="toolsFlower tf1" />
+        <Flower petal="#F7D8DF" center="#F3CC68" className="toolsFlower tf2" />
+        <Flower petal="#F4A84C" center="#FFFFFF" className="toolsFlower tf3" />
+
         <motion.div
           className="toolsInner"
           initial={{ opacity: 0, y: 40 }}
@@ -446,6 +428,8 @@ export default function Home() {
               "Canva",
               "ChatGPT",
               "Claude",
+              "Calendly",
+              "Later",
             ].map((tool) => (
               <motion.span
                 key={tool}
@@ -459,7 +443,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="process section">
+      <section className="process section" id="process">
         <motion.div
           className="sectionHeading"
           variants={fadeUp}
@@ -468,7 +452,6 @@ export default function Home() {
           viewport={{ once: true }}
         >
           <p className="sectionNumber">05</p>
-
           <div>
             <p className="eyebrow">HOW WE&apos;LL WORK TOGETHER</p>
             <h2>A simple, organized onboarding process.</h2>
@@ -503,13 +486,7 @@ export default function Home() {
       </section>
 
       <section className="contact" id="contact">
-        <motion.span
-          className="contactFlower"
-          animate={{ rotate: [0, 8, 0, -8, 0] }}
-          transition={{ duration: 9, repeat: Infinity }}
-        >
-          ✿
-        </motion.span>
+        <Flower petal="#F7D8DF" center="#F3CC68" className="contactFlower" />
 
         <motion.div
           className="contactInner"
@@ -545,6 +522,7 @@ export default function Home() {
       <footer>
         <p>© 2026 Micaela Manalili</p>
         <p>Operations Virtual Assistant · Admin & Workflow Support</p>
+        <p className="sig">Micaela</p>
       </footer>
     </main>
   );
